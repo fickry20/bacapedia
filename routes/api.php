@@ -21,6 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 use App\Http\Controllers\Api\BukuController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\TransaksiController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -41,6 +42,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/buku/{buku}', [BukuController::class, 'update']);
         Route::delete('/buku/{buku}', [BukuController::class, 'destroy']);
     });
+
+    // Transaksi Peminjaman, Pengembalian, & Riwayat
+    Route::post('/pinjam', [TransaksiController::class, 'pinjam']);
+    Route::post('/kembali/{peminjam_id}', [TransaksiController::class, 'kembali']);
+    Route::get('/riwayat', [TransaksiController::class, 'riwayat']);
 });
+
 
 
